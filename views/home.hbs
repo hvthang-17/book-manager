@@ -1,1 +1,42 @@
 <h1>Quản lý Sách</h1>
+
+{{#if error}}
+<p class="error">{{error}}</p>
+{{/if}}
+
+<form method="POST" action="/books">
+    <input name="maSP" value="{{form.maSP}}" placeholder="Mã SP (bắt đầu bằng {{PREFIX}})" required>
+    <input name="tenSach" value="{{form.tenSach}}" placeholder="Tên sách" required>
+    <input name="tacGia" value="{{form.tacGia}}" placeholder="Tác giả">
+    <input name="giaGoc" value="{{form.giaGoc}}" type="number" min="1" placeholder="Giá gốc (VNĐ)" required>
+    <button type="submit">Thêm sách</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Mã SP</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Giá gốc</th>
+            <th>VAT</th>
+            <th>Giá sau thuế</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each books}}
+        <tr>
+            <td>{{maSP}}</td>
+            <td>{{tenSach}}</td>
+            <td>{{tacGia}}</td>
+            <td>{{giaGoc}}</td>
+            <td>{{vat}}%</td>
+            <td>{{giaSauThue}}</td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="6">Chưa có sách nào.</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
